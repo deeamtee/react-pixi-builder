@@ -1,0 +1,10 @@
+.controls {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.controls:hover,
+.selected {
+    display: flex;
+    border: 1px dashed blue;
+}

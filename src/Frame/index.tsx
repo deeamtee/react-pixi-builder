@@ -1,9 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import FrameContent from './FrameContent';
+import React from "react";
+import ReactDOMClient from "react-dom/client";
+import FrameContent from "./FrameContent";
+import * as PIXI from "pixi.js";
 
-const root = document.getElementById('app');
-window['React'] = React;
-window['ReactDOM'] = ReactDOM;
+const container = document.getElementById("app");
+const root = ReactDOMClient.createRoot(container as HTMLElement);
+window["React"] = React;
+window["ReactDOM"] = ReactDOMClient as any;
+window["PIXI"] = PIXI;
 
-ReactDOM.render(<FrameContent />, root);
+root.render(<FrameContent />);

@@ -1,1 +1,1 @@
-{"version":3,"file":"shimmer.bundle.js","mappings":"AAAAA,OAAM,QAAc,CAChBC,IAAK","sources":["webpack://builder-mini/./src/shimmer.ts"],"sourcesContent":["window['process'] = {\r\n    env: {}\r\n}"],"names":["window","env"],"sourceRoot":""}
+{"version":3,"file":"shimmer.bundle.js","mappings":";;;;;AAAAA,MAAM,CAAC,SAAD,CAAN,GAAoB;AAChBC,EAAAA,GAAG,EAAE;AADW,CAApB,C","sources":["webpack://builder-mini/./src/shimmer.ts"],"sourcesContent":["window['process'] = {\r\n    env: {}\r\n}"],"names":["window","env"],"sourceRoot":""}

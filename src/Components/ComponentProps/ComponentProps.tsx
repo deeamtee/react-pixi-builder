@@ -20,7 +20,7 @@ export const ComponentProps: React.FC<Props> = ({
 }) => {
   if (index !== undefined) {
     const componentProps = findComponentProps(code, index);
-    console.log("componentProps", componentProps);
+
     return (
       <Groups design="vertical" height="auto" alignItems="center">
         {Object.entries(componentProps).map(([key, data]) => {
@@ -28,7 +28,7 @@ export const ComponentProps: React.FC<Props> = ({
           const disabled =
             deps.length > 0
               ? !deps.some(([propName, values]) =>
-                  values.includes(componentProps[propName].value)
+                  values.includes(componentProps[propName]?.value)
                 )
               : false;
           return constructInput(

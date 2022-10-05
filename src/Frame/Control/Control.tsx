@@ -37,7 +37,8 @@ interface Props extends DataSet {
   elemRef: React.RefObject<any>;
 }
 
-const overlay = document.getElementById("overlay");
+const overlay =
+  document.getElementById("overlay") ?? document.createElement("div");
 
 const rectBase = {
   height: 0,
@@ -51,8 +52,9 @@ const rectBase = {
 const getRect = (element: Element) => {
   const children = Array.from(element?.children ?? []);
   const newRect = { ...rectBase };
-
   for (const child of children) {
+    if (!(child instanceof HTMLElement)) continue;
+
     const childRect =
       child.style.display === "contents"
         ? getRect(child)
@@ -191,8 +193,7 @@ export const Control: React.FC<Props> = ({ elemRef, ...dataset }) => {
     </div>
   );
 
-  return <></>;
-  // return ReactDOM.createPortal(element, overlay);
+  return ReactDOM.createPortal(element, overlay);
 };
 
 export default Control;

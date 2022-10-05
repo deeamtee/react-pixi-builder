@@ -1,5 +1,5 @@
 import React from "react";
-import { IStandartComponents, Props } from "./interfaces";
+import { IStandartComponents } from "./interfaces";
 
 const stage: any = {
   width: {
@@ -45,6 +45,69 @@ const sprite: any = {
     type: String,
     value: "",
   },
+  onClick: {
+    type: Function,
+    value: null,
+  },
+  children: {
+    type: React,
+    value: 0,
+  },
+};
+
+const text: any = {
+  x: {
+    type: Number,
+    value: 0,
+  },
+  y: {
+    type: Number,
+    value: 0,
+  },
+  text: {
+    type: String,
+    value: "",
+  },
+  style: {
+    type: String,
+    value: "",
+  },
+  canvas: {
+    type: String,
+    value: "",
+  },
+  children: {
+    type: React,
+    value: 0,
+  },
+};
+
+const graphics: any = {
+  x: {
+    type: Number,
+    value: 0,
+  },
+  y: {
+    type: Number,
+    value: 0,
+  },
+  fill: {
+    type: String,
+    value: "",
+  },
+  rotation: {
+    type: String,
+    value: "",
+  },
+  drawRect: {
+    type: String,
+    value: null,
+  },
+
+  children: {
+    type: React,
+    value: 0,
+  },
 };
 
 export const pixiComponents: IStandartComponents = {
@@ -54,6 +117,14 @@ export const pixiComponents: IStandartComponents = {
   },
   "ReactPIXI.Sprite": {
     props: { ...sprite },
+    children: null,
+  },
+  text: {
+    props: { ...text },
+    children: null,
+  },
+  graphics: {
+    props: { ...graphics },
     children: null,
   },
 };

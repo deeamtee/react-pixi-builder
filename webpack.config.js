@@ -41,7 +41,15 @@ module.exports = {
             {
                 test: /\.ttf$/,
                 use: ['file-loader']
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
         ]
     },
     resolve: {

@@ -1,5 +1,4 @@
 export const model = `
-
 function PixiApp() {
     const [y, setY] = React.useState(0);
     const [applePosition, setApplePosition] = React.useState({ x: 700, y: 250 });
@@ -84,19 +83,19 @@ function PixiApp() {
     return (
         <>
             {background.map(({ x, y }, i) => (
-                <ReactPIXI.Sprite key={i} img={"../resources/trava.png"} width={backgroundSize} height={backgroundSize} x={x} y={y} />
+                <ReactPIXI.Sprite key={i} img="../resources/trava.png" width={backgroundSize} height={backgroundSize} x={x} y={y} />
             ))}
             {randomForest.map((tree, i) => {
                 if (tree.number === 1) {
-                    return <ReactPIXI.Sprite key={i} img={"../resources/tree1.png"} width={100} height={100} x={tree.x} y={tree.y} />;
+                    return <ReactPIXI.Sprite key={i} img="../resources/tree1.png" width={100} height={100} x={tree.x} y={tree.y} />;
                 } else {
-                    return <ReactPIXI.Sprite key={i} img={"../resources/tree2.png"} width={100} height={100} x={tree.x} y={tree.y} />;
+                    return <ReactPIXI.Sprite key={i} img="../resources/tree2.png" width={100} height={100} x={tree.x} y={tree.y} />;
                 }
             })}
             <text text={counter} style={{ fontSize: 48, fill: 0xffffff }} x={750} y={0} />
-            {appleVisible && <ReactPIXI.Sprite img={"../resources/apple.png"} width={75} height={50} x={applePosition.x} y={applePosition.y} />}
-            <ReactPIXI.Sprite img={"../resources/arrow.png"} width={70} height={40} x={arrowPosition.x} y={arrowPosition.y} />
-            <ReactPIXI.Sprite img={"../resources/boy.png"} width={150} height={120} x={30} y={y} anchor={0.37} onMouseMove={handleMouseMove} />
+            {appleVisible && <ReactPIXI.Sprite img="../resources/apple.png" width={75} height={50} x={applePosition.x} y={applePosition.y} />}
+            <ReactPIXI.Sprite img="../resources/arrow.png" width={70} height={40} x={arrowPosition.x} y={arrowPosition.y} />
+            <ReactPIXI.Sprite img="../resources/boy.png" width={150} height={120} x={30} y={y} anchor={0.37} onMouseMove={handleMouseMove} />
         </>
     );
 }

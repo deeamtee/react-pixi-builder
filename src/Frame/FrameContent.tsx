@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import wrap from "./Wrapper";
-import Stage from "../react-pixi/components/Stage";
 
 import "./style.css";
+import { Control } from "./Control";
 
 interface Selected {
   index: number;

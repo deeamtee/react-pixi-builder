@@ -49,8 +49,11 @@ export const App = () => {
   // Вызывается в onChange
   // в appendComponent переписываю генерацию
   const playgroundChangeHandler = useCallback(
-    (index: number, type: string, name: string, slot: string) =>
-      setCode((code) => appendComponent(code, index, type, name, slot)),
+    (index: number, type: string, name: string, slot: string) => {
+      console.log(index);
+
+      return setCode((code) => appendComponent(code, index, type, name, slot));
+    },
     []
   );
 

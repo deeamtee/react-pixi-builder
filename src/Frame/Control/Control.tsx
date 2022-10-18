@@ -145,6 +145,8 @@ export const Control: React.FC<Props> = ({ elemRef, ...dataset }) => {
 
   const contextMenuHandler = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
+    console.log(e);
+
     setContextMenuPos({ x: e.pageX, y: e.pageY });
     setShowContextMenu(true);
   }, []);

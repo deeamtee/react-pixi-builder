@@ -53,7 +53,8 @@ export const ExtendedWrapper: React.FC = ({ children, ...attrs }: any) => {
   return (
     <>
       <div ref={ref} style={{ display: "contents" }}>
-        {wrappedChildren}
+        {/* {wrappedChildren} */}
+        {children}
       </div>
       {/* <Control elemRef={ref} {...(attrs as any)} /> */}
     </>

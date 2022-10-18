@@ -30,7 +30,7 @@ const hostConfig = {
   createInstance: (type, props) => {
     let instance;
     if (type === 'sprite') {
-      const { x = 0, y = 0, rotation, anchor, zIndex } = props;
+      const { x = 0, y = 0, rotation, anchor, zIndex, interactive, onClick } = props;
 
       instance = new PIXI.Sprite(props.texture);
 
@@ -39,6 +39,15 @@ const hostConfig = {
 
       instance.x = x;
       instance.y = y;
+
+      instance.interactive = interactive ?? false;
+      if (onClick) {
+        if (instance._onClick) {
+          instance.off('click', instance._onClick);
+        }
+        instance.on('click', onClick);
+        instance._onClick = onClick;
+      }
 
       setEventHandlers(instance, props);
 
@@ -156,9 +165,19 @@ const hostConfig = {
    * */
   commitUpdate: (instance, updatePayload, type, oldProps, newProps) => {
     if (type === "sprite") {
-      const { x = 0, y = 0, rotation, zIndex } = updatePayload;
+      const { x = 0, y = 0, rotation, zIndex, interactive, onClick } = updatePayload;
       instance.x = x;
       instance.y = y;
+
+      instance.interactive = interactive ?? false;
+      if (onClick) {
+        if (instance._onClick) {
+          instance.off('click', instance._onClick);
+        }
+        instance.on('click', onClick);
+        instance._onClick = onClick;
+      }
+
       if (rotation) {
         instance.rotation = rotation;
       }

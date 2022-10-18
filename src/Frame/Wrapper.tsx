@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { print, visit, types } from "recast";
 import { transform, registerPreset, availablePresets } from "@babel/standalone";
 import { parse } from "recast/parsers/babel";
-
-import * as ViennaUI from "vienna-ui";
+import { FrameContext } from "./FrameContent";
 // import * as ReactPIXI from "../react-pixi/components";
-import { ExtendedWrapper } from "./ExtendedWrapper";
 import ErrorBoundary from "./ErrorBoundary";
 
 registerPreset("tsx", {
@@ -14,49 +12,42 @@ registerPreset("tsx", {
   ],
 });
 
-const createExtendWrapper = (
-  builders: typeof types.builders,
-  children: any
-): types.namedTypes.JSXElement => {
-  if (children.extra) {
-    children.extra.parenthesized = false;
-  }
-
-  return builders.jsxElement(
-    builders.jsxOpeningElement(
-      builders.jsxIdentifier("ExtendedWrapper"),
-      [],
-      false
-    ),
-    builders.jsxClosingElement(builders.jsxIdentifier("ExtendedWrapper")),
-    [children]
-  );
-};
-
 export const wrap = (componentCode: string): React.FC<any> => {
   try {
-    const newCode = componentCode;
+
+    const ast = parse(componentCode);
+    let index = 0;
+
+    const builders = types.builders;
+
+    visit(ast, {
+      visitJSXOpeningElement: (element) => {
+
+        const identifierInteractive = builders.jsxIdentifier("interactive");
+        const attributeInteractive = builders.jsxAttribute(identifierInteractive);
+        element.node.attributes?.push(attributeInteractive);
+
+        const expressionTemplate = `(e) => window['contextValue']?.onSelect(${index})`;
+        const fragment = parse(expressionTemplate);
+        const identifierOnClick = builders.jsxIdentifier("onClick");
+        const expressionOnClick = builders.jsxExpressionContainer(fragment.program.body[0].expression);
+        const attributeOnClick = builders.jsxAttribute(identifierOnClick, expressionOnClick);
+        element.node.attributes?.push(attributeOnClick);
+
+        index++;
+        return false;
+      }
+    });
+
+    const newCode = print(ast).code;
 
     const transformed = transform(newCode, {
       presets: ["env", "react", "tsx"],
     });
 
     ////////////////////////////////
-    const func = new Function(
-      "React",
-      "ExtendedWrapper",
-      "ViennaUI",
-      "ReactPIXI",
-      "MaterialUI",
-      `${transformed.code} return Component;`
-    );
-    const Wrapped = func(
-      React,
-      ExtendedWrapper,
-      ViennaUI,
-      window["ReactPIXI"],
-      window["MaterialUI"]
-    );
+    const func = new Function("React", "ReactPIXI", `${transformed.code} return Component;`);
+    const Wrapped = func(React, window["ReactPIXI"]);
     ////////////////////////////////
 
     return (props) => (

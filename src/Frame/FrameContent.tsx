@@ -31,6 +31,7 @@ export const FrameContent = () => {
   }, []);
 
   const Wrapped = wrap(code);
+  window['contextValue'] = contextValue;
 
   return (
     <FrameContext.Provider value={contextValue}>
